@@ -1,0 +1,2346 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  branch: master
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_0
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Twitter Image
+            name: twitter:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: gallery_section
+    label: Gallery Sections
+    folder: cms/gallery-section
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_pictures
+        label: Pictures
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: gallery-section
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[gallery-section].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: blogs
+    label: Blogs
+    folder: cms/blogs
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Blog Rich Text
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_blog-short-description
+        label: Blog short description
+        widget: string
+        required: false
+      - hint: ''
+        name: f_blog-date
+        label: Blog date
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_featured
+        label: Featured
+        widget: boolean
+        required: false
+        default: false
+      - hint: ''
+        name: f_index
+        label: Index
+        widget: number
+        required: false
+      - hint: ''
+        name: f_blog-image
+        label: Blog image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_the-tag-color
+        label: The tag color
+        widget: color
+        required: false
+        enableAlpha: true
+        allowInput: true
+      - hint: ''
+        name: f_category-tag
+        label: Category Tag
+        widget: string
+        required: false
+      - hint: ''
+        name: f_bg-color
+        label: Bg color
+        widget: color
+        required: false
+        enableAlpha: true
+        allowInput: true
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: blogs
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[blogs].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: packages
+    label: Packages
+    folder: cms/packages
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Short Rich Text
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_detailed-rich-text
+        label: Detailed Rich Text
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_logo-image
+        label: Logo Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_image
+        label: Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: packages
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[packages].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: services
+    label: Services
+    folder: cms/services
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - label: Single services Rich text
+        name: body
+        widget: markdown
+        required: false
+      - hint: ''
+        name: f_service-logo
+        label: Service Logo
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_service-short-description
+        label: Service short description
+        widget: string
+        required: false
+      - hint: ''
+        name: f_home-service-logo
+        label: Home Service logo
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_single-service-cover-image
+        label: Single service cover image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: services
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[services].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Home, key: 2268ff'
+            label: Text
+            name: 2268ff
+            widget: string
+          - hint: 'Original text: About Us, key: 645efc51'
+            label: Text
+            name: 645efc51
+            widget: string
+          - hint: 'Original text: Services, key: 560f747e'
+            label: Text
+            name: 560f747e
+            widget: string
+          - hint: 'Original text: Packages, key: 309bb90d'
+            label: Text
+            name: 309bb90d
+            widget: string
+          - hint: 'Original text: Blog , key: 3d4d49e'
+            label: Text
+            name: 3d4d49e
+            widget: string
+          - hint: 'Original text: Contact Us, key: 7f2746de'
+            label: Text
+            name: 7f2746de
+            widget: string
+          - hint: 'Original text: +971506163969, key: 31635441'
+            label: Text
+            name: '31635441'
+            widget: string
+          - hint: >-
+              Original text: Unlocking Business Success in the UAE, key:
+              -3cfb4776
+            label: Text
+            name: '-3cfb4776'
+            widget: string
+          - hint: >-
+              Original text: At D2B Business Solutions, we have deep roots in
+              the UAE, where we turn entrepreneurial dreams into flourishing
+              legacies., key: 7a08b199
+            label: Text
+            name: 7a08b199
+            widget: text
+          - hint: 'Original text: Talk to an Expert, key: -707dfef4'
+            label: Text
+            name: '-707dfef4'
+            widget: string
+          - hint: 'Original text: Cost Calculator, key: -1b824acb'
+            label: Text
+            name: '-1b824acb'
+            widget: string
+          - hint: 'Original text: Tailored Business Solutions, key: 44fdaa68'
+            label: Text
+            name: 44fdaa68
+            widget: string
+          - hint: >-
+              Original text: Local Expertise with a Global Perspective, key:
+              2daf36b4
+            label: Text
+            name: 2daf36b4
+            widget: string
+          - hint: 'Original text: Comprehensive Support Beyond Setup, key: 7fca2c69'
+            label: Text
+            name: 7fca2c69
+            widget: string
+          - hint: 'Original text: Firm''s Approach, key: -e2a88e2'
+            label: Text
+            name: '-e2a88e2'
+            widget: string
+          - hint: 'Original text: Business Set Up Services, key: 589ce925'
+            label: Text
+            name: 589ce925
+            widget: string
+          - hint: >-
+              Original text: Considering Establishing a Business in Dubai?
+              Launching a business in Dubai becomes straightforward with the
+              assistance of seasoned experts. D2B Business Solutions provides
+              top-tier and cost-effective business setup services., key:
+              -6b668b09
+            label: Text
+            name: '-6b668b09'
+            widget: text
+          - hint: >-
+              Original text: Choose your business need in Dubai or UAE to
+              continue, key: -32112c64
+            label: Text
+            name: '-32112c64'
+            widget: string
+          - hint: 'Original text: I want to start a Company, key: 439de6f4'
+            label: Text
+            name: 439de6f4
+            widget: string
+          - hint: 'Original text: I already have a Company, key: 48208565'
+            label: Text
+            name: '48208565'
+            widget: string
+          - hint: 'Original text: Talk to our expert, key: 4b849fef'
+            label: Text
+            name: 4b849fef
+            widget: string
+          - hint: 'Original text: Thank you for selecting this option, key: -12075731'
+            label: Text
+            name: '-12075731'
+            widget: string
+          - hint: >-
+              Original text: Select your preference of company formation, key:
+              -48335a7f
+            label: Text
+            name: '-48335a7f'
+            widget: string
+          - hint: 'Original text: 1, key: 31'
+            label: Text
+            name: '31'
+            widget: string
+          - hint: 'Original text: 2, key: 32'
+            label: Text
+            name: '32'
+            widget: string
+          - hint: 'Original text: 3, key: 33'
+            label: Text
+            name: '33'
+            widget: string
+          - hint: 'Original text: 4, key: 34'
+            label: Text
+            name: '34'
+            widget: string
+          - hint: >-
+              Original text: Select business type one and click next step, key:
+              5089a3b4
+            label: Text
+            name: 5089a3b4
+            widget: string
+          - hint: 'Original text: MAINLAND, key: 2e300324'
+            label: Text
+            name: '2e300324'
+            widget: string
+          - hint: 'Original text: FREEZONE, key: -2cf9ebe8'
+            label: Text
+            name: '-2cf9ebe8'
+            widget: string
+          - hint: 'Original text: OFFSHORE, key: 197d45e'
+            label: Text
+            name: 197d45e
+            widget: string
+          - hint: >-
+              Original text: Select one services type one and click next step,
+              key: -6505d864
+            label: Text
+            name: '-6505d864'
+            widget: string
+          - hint: 'Original text: Business Registration and Licensing, key: -4356c532'
+            label: Text
+            name: '-4356c532'
+            widget: string
+          - hint: >-
+              Original text: Corporate Legal and Compliance Advisory, key:
+              -4a7e3fcd
+            label: Text
+            name: '-4a7e3fcd'
+            widget: string
+          - hint: 'Original text: Financial and Accounting Services, key: 60a75309'
+            label: Text
+            name: 60a75309
+            widget: string
+          - hint: 'Original text: Strategic Insights, key: -76de0525'
+            label: Text
+            name: '-76de0525'
+            widget: string
+          - hint: 'Original text: What’s your project budget?, key: -7fa564d8'
+            label: Text
+            name: '-7fa564d8'
+            widget: string
+          - hint: >-
+              Original text: Please select the project budget range you have in
+              mind., key: 79a6245e
+            label: Text
+            name: 79a6245e
+            widget: string
+          - hint: 'Original text: AED 5,000 - AED 10,000, key: 2627ce7d'
+            label: Text
+            name: 2627ce7d
+            widget: string
+          - hint: 'Original text: AED 10,000 - AED 20,000, key: 4aa77372'
+            label: Text
+            name: 4aa77372
+            widget: string
+          - hint: 'Original text: AED 20,000 - AED50,000, key: -46da2dd2'
+            label: Text
+            name: '-46da2dd2'
+            widget: string
+          - hint: 'Original text: AED 50,000 +, key: 3c68ab6a'
+            label: Text
+            name: 3c68ab6a
+            widget: string
+          - hint: >-
+              Original text: Click on the button to Talk to our business
+              representative, key: -1495c157
+            label: Text
+            name: '-1495c157'
+            widget: string
+          - hint: 'Original text: TALK TO OUR EXPERT, key: -44444c11'
+            label: Text
+            name: '-44444c11'
+            widget: string
+          - hint: 'Original text: Previous step, key: 1c45ae35'
+            label: Text
+            name: 1c45ae35
+            widget: string
+          - hint: 'Original text: Next step, key: -43789447'
+            label: Text
+            name: '-43789447'
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Please review all the information you previously
+              typed in the past steps, and if all is okay, submit your message
+              to receive a project quote in 24 - 48 hours., key: -610c742a
+            label: Text
+            name: '-610c742a'
+            widget: text
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: >-
+              Original text: You have selected “I already have a company”., key:
+              310531e4
+            label: Text
+            name: '310531e4'
+            widget: string
+          - hint: 'Original text: Now pick your license-related task., key: b7bfc50'
+            label: Text
+            name: b7bfc50
+            widget: string
+          - hint: >-
+              Original text: Select license-related task and click next step,
+              key: -4d6de33e
+            label: Text
+            name: '-4d6de33e'
+            widget: string
+          - hint: 'Original text: I WANT TO RENEW MY LICENSE, key: -2611a9d4'
+            label: Text
+            name: '-2611a9d4'
+            widget: string
+          - hint: 'Original text: I NEED TO MAKE CHANGES IN MY LICENSE, key: -9381df5'
+            label: Text
+            name: '-9381df5'
+            widget: string
+          - hint: 'Original text: I WANT TO SELL MY LICENSE, key: -5dca7731'
+            label: Text
+            name: '-5dca7731'
+            widget: string
+          - hint: 'Original text: ABout Us, key: -38686bcf'
+            label: Text
+            name: '-38686bcf'
+            widget: string
+          - hint: >-
+              Original text: At D2B Business Solutions, we're your trusted
+              partner for business success in the UAE. Located in the heart of
+              the Emirates, we provide tailored business setup services for
+              startups, medium-sized enterprises, and large corporations., key:
+              3cc9478b
+            label: Text
+            name: 3cc9478b
+            widget: text
+          - hint: 'Original text: Know More, key: -30663036'
+            label: Text
+            name: '-30663036'
+            widget: string
+          - hint: 'Original text: Your Business Here, UAE, key: 6b6ba7e2'
+            label: Text
+            name: 6b6ba7e2
+            widget: string
+          - hint: 'Original text: 350, key: c60e'
+            label: Text
+            name: c60e
+            widget: string
+          - hint: 'Original text: +, key: 2b'
+            label: Text
+            name: 2b
+            widget: string
+          - hint: 'Original text: Satisfied Clients, key: 208bbbda'
+            label: Text
+            name: 208bbbda
+            widget: string
+          - hint: 'Original text: 98, key: 71f'
+            label: Text
+            name: 71f
+            widget: string
+          - hint: 'Original text: %, key: 25'
+            label: Text
+            name: '25'
+            widget: string
+          - hint: 'Original text: Clients, key: -697be218'
+            label: Text
+            name: '-697be218'
+            widget: string
+          - hint: 'Original text: Success, key: -c12281d'
+            label: Text
+            name: '-c12281d'
+            widget: string
+          - hint: 'Original text: 82, key: 6fa'
+            label: Text
+            name: 6fa
+            widget: string
+          - hint: 'Original text: M, key: 4d'
+            label: Text
+            name: 4d
+            widget: string
+          - hint: 'Original text: Revenue, key: -5b392404'
+            label: Text
+            name: '-5b392404'
+            widget: string
+          - hint: 'Original text: Increased, key: 27936a42'
+            label: Text
+            name: 27936a42
+            widget: string
+          - hint: 'Original text: Contact Form, key: 526a3504'
+            label: Text
+            name: 526a3504
+            widget: string
+          - hint: 'Original text: Fill out the form below, key: 45bfa193'
+            label: Text
+            name: 45bfa193
+            widget: string
+          - hint: 'Original text: Let’s talk., key: f1253d7'
+            label: Text
+            name: f1253d7
+            widget: string
+          - hint: >-
+              Original text: Please let us know if you have a question, want to
+              leave a comment, or would like further information, key: -6b9a280c
+            label: Text
+            name: '-6b9a280c'
+            widget: text
+          - hint: 'Original text: SErvices, key: -46b7f3a2'
+            label: Text
+            name: '-46b7f3a2'
+            widget: string
+          - hint: 'Original text: All Services, key: -4dd08bc3'
+            label: Text
+            name: '-4dd08bc3'
+            widget: string
+          - hint: >-
+              Original text: D2B offers comprehensive business formation
+              services in Dubai, specializing in startup guidance and growth.,
+              key: -26aad7c6
+            label: Text
+            name: '-26aad7c6'
+            widget: text
+          - hint: 'Original text: View All Services, key: -6de18248'
+            label: Text
+            name: '-6de18248'
+            widget: string
+          - hint: 'Original text: Explore, key: 15309273'
+            label: Text
+            name: '15309273'
+            widget: string
+          - hint: 'Original text: No items found., key: 3d503d2b'
+            label: Text
+            name: 3d503d2b
+            widget: string
+          - hint: >-
+              Original text: Ready for expert support to grow your business?,
+              key: -441474f3
+            label: Text
+            name: '-441474f3'
+            widget: string
+          - hint: 'Original text: Get in Touch, key: -53f399f2'
+            label: Text
+            name: '-53f399f2'
+            widget: string
+          - hint: 'Original text: 98%, key: dce6'
+            label: Text
+            name: dce6
+            widget: string
+          - hint: 'Original text: Revenue Growth, key: -7010d975'
+            label: Text
+            name: '-7010d975'
+            widget: string
+          - hint: 'Original text: Testimonials, key: 1590c3d4'
+            label: Text
+            name: 1590c3d4
+            widget: string
+          - hint: >-
+              Original text: D2b Corporate Services facilitated our business
+              setup seamlessly, ensuring compliance and efficiency. Highly
+              recommended!, key: 69ad931f
+            label: Text
+            name: 69ad931f
+            widget: text
+          - hint: 'Original text: Noushad CK, key: -53a068e4'
+            label: Text
+            name: '-53a068e4'
+            widget: string
+          - hint: "Original text: CEO, Micro health laboratory\_, key: -1467161a"
+            label: Text
+            name: '-1467161a'
+            widget: string
+          - hint: >-
+              Original text: Efficient trademark registration and government
+              approvals handled by D2b Corporate Services. Truly impressed with
+              their expertise!, key: -9a3ead
+            label: Text
+            name: '-9a3ead'
+            widget: text
+          - hint: 'Original text: MOHAMMED ADIL, key: -6c8419f4'
+            label: Text
+            name: '-6c8419f4'
+            widget: string
+          - hint: 'Original text: Excutive director, Habib bakery, key: 56b52c95'
+            label: Text
+            name: 56b52c95
+            widget: string
+          - hint: >-
+              Original text: We are grateful for their exceptional support and
+              highly recommend their services to any business seeking reliable
+              banking solutions,Thank you D2B!, key: 2dbca099
+            label: Text
+            name: 2dbca099
+            widget: text
+          - hint: 'Original text: Fairooz, key: 22776cd6'
+            label: Text
+            name: 22776cd6
+            widget: string
+          - hint: >-
+              Original text: Managing Director, Swishline shipping, key:
+              -6081b062
+            label: Text
+            name: '-6081b062'
+            widget: string
+          - hint: 'Original text: About, key: 3c2336d'
+            label: Text
+            name: 3c2336d
+            widget: string
+          - hint: >-
+              Original text: D2B Solutions: Where Dubai's business potential
+              thrives. Join us in this vibrant market landscape, where success
+              is a shared journey, charted with precision and expertise., key:
+              -1656684e
+            label: Text
+            name: '-1656684e'
+            widget: text
+          - hint: 'Original text: quick Links, key: -4e204c5a'
+            label: Text
+            name: '-4e204c5a'
+            widget: string
+          - hint: 'Original text: Blogs, key: 3d4d4f1'
+            label: Text
+            name: 3d4d4f1
+            widget: string
+          - hint: >-
+              Original text: All rights reserved © D2b Corporate Services., key:
+              717c6684
+            label: Text
+            name: 717c6684
+            widget: string
+          - hint: "Original text: Designed and developed by \_, key: -b680b99"
+            label: Text
+            name: '-b680b99'
+            widget: string
+          - hint: 'Original text: Emilda Solutions, key: -7c9b8a7e'
+            label: Text
+            name: '-7c9b8a7e'
+            widget: string
+          - hint: 'Original text: Our Services, key: 13a96ef2'
+            label: Text
+            name: 13a96ef2
+            widget: string
+          - hint: >-
+              Original text: Pioneering Success in the UAE's Dynamic Market.,
+              key: 33165461
+            label: Text
+            name: '33165461'
+            widget: string
+          - hint: >-
+              Original text: In the heart of Dubai's business world, expertise
+              and passion converge, crafting a landscape where entrepreneurial
+              dreams flourish. Here, every venture finds its path to success.,
+              key: 21cccf5d
+            label: Text
+            name: 21cccf5d
+            widget: text
+          - hint: 'Original text: Contact, key: -64104400'
+            label: Text
+            name: '-64104400'
+            widget: string
+          - hint: 'Original text: Services , key: 6bdf1b62'
+            label: Text
+            name: 6bdf1b62
+            widget: string
+          - hint: 'Original text: Contact Us Page, key: -2ecee54f'
+            label: Text
+            name: '-2ecee54f'
+            widget: string
+          - hint: >-
+              Original text: We’ll figure out the best option for you, key:
+              7f76dfb1
+            label: Text
+            name: 7f76dfb1
+            widget: string
+          - hint: 'Original text: Consultation Form, key: -424ef405'
+            label: Text
+            name: '-424ef405'
+            widget: string
+          - hint: >-
+              Original text: Share your details with us and we'll find the ideal
+              solution for your business needs., key: 5ddd9c43
+            label: Text
+            name: 5ddd9c43
+            widget: string
+          - hint: 'Original text: Submit, key: -6bbed3c8'
+            label: Text
+            name: '-6bbed3c8'
+            widget: string
+          - hint: 'Original text: Contact Info, key: 526b8cee'
+            label: Text
+            name: 526b8cee
+            widget: string
+          - hint: >-
+              Original text: Office No. M10, M Floor, Sky Business building -
+              Dubai Festival City - Dubai - United Arab Emirates, key: 679e3a06
+            label: Text
+            name: 679e3a06
+            widget: text
+          - hint: 'Original text: admin@d2b.com, key: -5506a58a'
+            label: Text
+            name: '-5506a58a'
+            widget: string
+          - hint: 'Original text: Frequently Asked Questions, key: -475b7d60'
+            label: Text
+            name: '-475b7d60'
+            widget: string
+          - hint: >-
+              Original text: Explore key insights into our business setup
+              services in Dubai. From initial steps to full-scale operation, D2B
+              simplifies your journey, ensuring a smooth path to success in the
+              UAE's dynamic market., key: 618e2a28
+            label: Text
+            name: 618e2a28
+            widget: text
+          - hint: >-
+              Original text: What types of business licenses does D2B assist
+              with in the UAE?, key: 3fbdf6ce
+            label: Text
+            name: 3fbdf6ce
+            widget: string
+          - hint: >-
+              Original text: D2B assists with a variety of business licenses,
+              including commercial, professional, and industrial licenses,
+              tailored to the specific needs of your business in the UAE., key:
+              -55a418f6
+            label: Text
+            name: '-55a418f6'
+            widget: text
+          - hint: >-
+              Original text: How does D2B support foreign investors in company
+              formation?, key: 225d7127
+            label: Text
+            name: 225d7127
+            widget: string
+          - hint: >-
+              Original text: D2B provides comprehensive support to foreign
+              investors, including market analysis, legal assistance, and
+              strategic planning for successful company formation in the UAE.,
+              key: -115f61f7
+            label: Text
+            name: '-115f61f7'
+            widget: text
+          - hint: >-
+              Original text: D2B offers end-to-end solutions for international
+              clients, including business registration, finding local sponsors,
+              and navigating UAE's business landscape effectively., key:
+              6c59f6a1
+            label: Text
+            name: 6c59f6a1
+            widget: text
+          - hint: >-
+              Original text: Does D2B offer compliance guidance for UAE
+              regulations?, key: 169fcc0e
+            label: Text
+            name: 169fcc0e
+            widget: string
+          - hint: >-
+              Original text: Yes, D2B offers expert guidance on UAE regulations,
+              ensuring your business complies with local laws, including
+              financial, labor, and trade regulations., key: 57c25bc9
+            label: Text
+            name: 57c25bc9
+            widget: text
+          - hint: >-
+              Original text: How does D2B facilitate visa and work permit
+              processing for expats?, key: 7d665e15
+            label: Text
+            name: 7d665e15
+            widget: string
+          - hint: >-
+              Original text: D2B streamlines the visa and work permit process
+              for expats by handling documentation, liaising with authorities,
+              and providing up-to-date information on UAE immigration policies.,
+              key: -1c92dbc3
+            label: Text
+            name: '-1c92dbc3'
+            widget: text
+          - hint: 'Original text: Our Packages, key: -11ca4c7f'
+            label: Text
+            name: '-11ca4c7f'
+            widget: string
+          - hint: 'Original text: View More, key: 162663f0'
+            label: Text
+            name: 162663f0
+            widget: string
+          - hint: 'Original text: ‍, key: 200d'
+            label: Text
+            name: 200d
+            widget: string
+          - hint: 'Original text: Our Package, key: -321f4cce'
+            label: Text
+            name: '-321f4cce'
+            widget: string
+          - hint: 'Original text: Our Blogs, key: 3fe0efd'
+            label: Text
+            name: 3fe0efd
+            widget: string
+          - hint: 'Original text: Featured, key: -d78b7b2'
+            label: Text
+            name: '-d78b7b2'
+            widget: string
+          - hint: 'Original text: Entrepreneurship, key: -43fcb08b'
+            label: Text
+            name: '-43fcb08b'
+            widget: string
+          - hint: 'Original text: Blogs - , key: -238748de'
+            label: Text
+            name: '-238748de'
+            widget: string
+          - hint: 'Original text: About us, key: 645f0031'
+            label: Text
+            name: 645f0031
+            widget: string
+          - hint: >-
+              Original text: Dubai Festival City - Dubai - United Arab Emirates,
+              key: 763cb0c4
+            label: Text
+            name: 763cb0c4
+            widget: string
+          - hint: 'Original text: Who WE ARE, key: -7f821b5c'
+            label: Text
+            name: '-7f821b5c'
+            widget: string
+          - hint: >-
+              Original text: Experience the best Services for your business,
+              key: -57194b5
+            label: Text
+            name: '-57194b5'
+            widget: string
+          - hint: >-
+              Original text: At D2B Corporate Services, we specialize in guiding
+              businesses through the intricate landscape of the UAE's dynamic
+              corporate world. With a wealth of experience and a dedicated team
+              of experts, we are your trusted partner for setting up and
+              thriving in Dubai. From handling intricate documentation to
+              equipping your business with powerful promotional tools and
+              enabling seamless expansions, we are committed to helping you find
+              your way in the ever-evolving business landscape of the UAE.
+              Welcome to D2B, where your journey to business success begins.,
+              key: -34b7f918
+            label: Text
+            name: '-34b7f918'
+            widget: text
+          - hint: 'Original text: Our Mission, key: 3dba0078'
+            label: Text
+            name: 3dba0078
+            widget: string
+          - hint: 'Original text: Our Vision, key: -6243b084'
+            label: Text
+            name: '-6243b084'
+            widget: string
+          - hint: >-
+              Original text: Driven to set industry standards in innovation and
+              sustainability, we aim to shape the future with our commitment to
+              excellence and transformative practices., key: 3062bdae
+            label: Text
+            name: 3062bdae
+            widget: text
+          - hint: >-
+              Original text: Dedicated to empowering clients with superior
+              services, our mission centers on delivering quality and value,
+              fostering growth and success in every endeavor., key: -76352b93
+            label: Text
+            name: '-76352b93'
+            widget: text
+          - hint: 'Original text: Our Values, key: -62b76f4a'
+            label: Text
+            name: '-62b76f4a'
+            widget: string
+          - hint: >-
+              Original text: Guided by Integrity, Innovation, and Collaboration,
+              we steadfastly adhere to these principles, ensuring ethical
+              practices, creativity, and strong, enduring partnerships., key:
+              764b3629
+            label: Text
+            name: 764b3629
+            widget: text
+          - hint: 'Original text: Our Achievements, key: -469db448'
+            label: Text
+            name: '-469db448'
+            widget: string
+          - hint: >-
+              Original text: Our team of experienced professionals, key:
+              1e025bac
+            label: Text
+            name: 1e025bac
+            widget: string
+          - hint: 'Original text: 2M+, key: c530'
+            label: Text
+            name: c530
+            widget: string
+          - hint: 'Original text: Stripe for small businesses, key: -1cb6628f'
+            label: Text
+            name: '-1cb6628f'
+            widget: string
+          - hint: 'Original text: 40K, key: c94f'
+            label: Text
+            name: c94f
+            widget: string
+          - hint: 'Original text: Project completed, key: -1b68a61c'
+            label: Text
+            name: '-1b68a61c'
+            widget: string
+          - hint: 'Original text: 5K+, key: d035'
+            label: Text
+            name: d035
+            widget: string
+          - hint: 'Original text: Happy customers, key: -24e0690b'
+            label: Text
+            name: '-24e0690b'
+            widget: string
+          - hint: 'Original text: 10K+, key: 17039f'
+            label: Text
+            name: 17039f
+            widget: string
+          - hint: 'Original text: Management consultant, key: -39eba1a8'
+            label: Text
+            name: '-39eba1a8'
+            widget: string
+          - hint: 'Original text: Our Gallery, key: -db809c2'
+            label: Text
+            name: '-db809c2'
+            widget: string
+          - hint: 'Original text: Legacy in Snapshots, key: bf19cab'
+            label: Text
+            name: bf19cab
+            widget: string
+          - hint: >-
+              Original text: Discover the pivotal chapters of our journey,
+              captured in vivid photographs. From our company's inception to
+              landmark achievements, each image is a testament to our enduring
+              legacy., key: -4cff4805
+            label: Text
+            name: '-4cff4805'
+            widget: text
+          - hint: 'Original text: Founder''s Message, key: -1866363e'
+            label: Text
+            name: '-1866363e'
+            widget: string
+          - hint: >-
+              Original text: “Don’t limit yourself. Many people limit themselves
+              to what they think they can do. You can go as far as your mind
+              lets you. What you believe, remember, you can achieve.”, key:
+              540cea22
+            label: Text
+            name: 540cea22
+            widget: text
+          - hint: 'Original text: Afsar haneef abdullah, key: -a53959'
+            label: Text
+            name: '-a53959'
+            widget: string
+          - hint: 'Original text: Our team, key: 3796d1'
+            label: Text
+            name: 3796d1
+            widget: string
+          - hint: 'Original text: Introduce your team, key: -5f547bb7'
+            label: Text
+            name: '-5f547bb7'
+            widget: string
+          - hint: >-
+              Original text: A common concern a visitor experiences is how well
+              will the product or service be supported. Introducing the team
+              eases fears while showing confidence., key: 46ea68d9
+            label: Text
+            name: 46ea68d9
+            widget: text
+          - hint: 'Original text: Muhammed ijas, key: 35c7a6b3'
+            label: Text
+            name: 35c7a6b3
+            widget: string
+          - hint: 'Original text: Admin, key: 3c3132f'
+            label: Text
+            name: 3c3132f
+            widget: string
+          - hint: 'Original text: CEO, key: 1042d'
+            label: Text
+            name: 1042d
+            widget: string
+          - hint: 'Original text: Farhad VP, key: 2c8b9e26'
+            label: Text
+            name: 2c8b9e26
+            widget: string
+          - hint: "Original text: HEAD OF MARKETING AND\_SALES, key: -c1fba60"
+            label: Text
+            name: '-c1fba60'
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: /, key: 2f'
+            label: Link
+            name: 2f
+            widget: string
+          - hint: 'Original link: /about-us/, key: -766f6c3e'
+            label: Link
+            name: '-766f6c3e'
+            widget: string
+          - hint: 'Original link: /services/, key: -32173fbe'
+            label: Link
+            name: '-32173fbe'
+            widget: string
+          - hint: 'Original link: /packages/, key: 44e50d93'
+            label: Link
+            name: 44e50d93
+            widget: string
+          - hint: 'Original link: /blogs/, key: 63a5be2d'
+            label: Link
+            name: 63a5be2d
+            widget: string
+          - hint: 'Original link: /contact-us/, key: 6bfbaa95'
+            label: Link
+            name: 6bfbaa95
+            widget: string
+          - hint: 'Original link: tel:+971506163969, key: -2e4708de'
+            label: Link
+            name: '-2e4708de'
+            widget: string
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: >-
+              Original link: https://0wdgc9ssjcv.typeform.com/to/D7JzpFDm, key:
+              -6d6c91e8
+            label: Link
+            name: '-6d6c91e8'
+            widget: string
+          - hint: 'Original link: https://www.emildasolutions.com/, key: 6184bf70'
+            label: Link
+            name: 6184bf70
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: i377bd4de
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i6e05a4cb
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i376dbd5d
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 7b073081
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2db3c1d8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i2f7a529b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i406fee77
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i62fa74d4
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i6316979b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i5098b4a3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i34532fb5
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i39484e44
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 568fa742
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i380e804e
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i343700b3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i34614736
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i3428e932
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4f7b9cb8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 23cb9723
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: if8e10c4
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i6b159362
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6b5e2c1c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i79c403e1
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i12571f05
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 778d8ba0
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6ff395da
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 68df1b21
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: idc1b547
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 677ec8c3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i980cea3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 7afa1bc3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4a32de25'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-183b6987'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-109040ac'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1019fe14'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-29110a36'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 497bb71b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-3ba32c77'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-404d314f'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 48822eb3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 29317cf3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-60501222'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 26b97c48
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 76a6e143
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3bf131e1
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7c47145'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '0'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5495b50d
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7227d67b'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-61d5960f'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '27234966'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-5cac4fba'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 536d04c2
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4dc6c5f7'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1f7a768d'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-29f8d3ce'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-375fa5dc'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-29580fec'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 228ab130
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 6a21c869
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-526d9eb6'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-59161dc8'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 7cc3d680
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 55b0cfa4
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 55bee725
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-540b5eb5'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2d98dcf8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 7f2a7e9a
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '67876318'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 7af90cc5
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4483a368'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-3922368c'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-5715e989'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
